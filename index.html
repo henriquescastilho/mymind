@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MyMind | Estruture, sanitize e publique com seguranca</title>
+    <meta
+      name="description"
+      content="Base publica para organizar projetos com IA sem expor dados pessoais."
+    />
+    <link rel="stylesheet" href="assets/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#conteudo">Pular para o conteudo</a>
+
+    <header class="site-header">
+      <div class="brand">MyMind</div>
+      <nav aria-label="Navegacao principal">
+        <a href="#metodo">Metodo</a>
+        <a href="#gerador">Gerador</a>
+        <a href="#contribuir">Contribuir</a>
+      </nav>
+    </header>
+
+    <main id="conteudo">
+      <section class="hero">
+        <p class="kicker">Template publico para trabalho serio com IA</p>
+        <h1>Organize projetos com clareza sem deixar rastros pessoais.</h1>
+        <p>
+          MyMind oferece um fluxo direto para transformar ideias em repositorios publicos,
+          com privacidade por padrao e documentacao facil de manter.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#gerador">Gerar prompt inicial</a>
+          <a class="btn btn-ghost" href="KIT_PERGUNTAS_E_PROMPT.md">Ver kit de perguntas</a>
+        </div>
+      </section>
+
+      <section id="metodo" class="section">
+        <h2>Metodo de trabalho</h2>
+        <div class="cards">
+          <article class="card">
+            <h3>1. Descoberta objetiva</h3>
+            <p>
+              Preencha perguntas essenciais para definir escopo, publico, arquitetura e
+              restricoes de privacidade sem incluir dados reais.
+            </p>
+          </article>
+          <article class="card">
+            <h3>2. Geracao orientada</h3>
+            <p>
+              Use o prompt-base para pedir ao Codex ou ao Claude Code uma primeira versao
+              editavel e consistente do projeto.
+            </p>
+          </article>
+          <article class="card">
+            <h3>3. Revisao e publicacao</h3>
+            <p>
+              Rode verificacoes com `rg`, ajuste os arquivos e publique so o que e seguro,
+              util e revisavel.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="gerador" class="section generator">
+        <div>
+          <h2>Gerador rapido de prompt</h2>
+          <p>
+            Informe o minimo necessario e gere um prompt de partida. Depois, refine com o
+            arquivo completo `KIT_PERGUNTAS_E_PROMPT.md`.
+          </p>
+          <form id="prompt-form" novalidate>
+            <label for="objetivo">Objetivo do projeto</label>
+            <textarea id="objetivo" name="objetivo" rows="4" required></textarea>
+
+            <label for="publico">Publico principal</label>
+            <input id="publico" name="publico" type="text" required />
+
+            <fieldset>
+              <legend>Arquivos iniciais</legend>
+              <label class="inline-option">
+                <input type="checkbox" name="arquivos" value="README.md" checked /> README.md
+              </label>
+              <label class="inline-option">
+                <input type="checkbox" name="arquivos" value="docs/PRIVACY.md" checked />
+                docs/PRIVACY.md
+              </label>
+              <label class="inline-option">
+                <input type="checkbox" name="arquivos" value="index.html" /> index.html
+              </label>
+            </fieldset>
+
+            <button type="submit" class="btn btn-primary">Gerar prompt</button>
+          </form>
+        </div>
+
+        <aside class="output" aria-live="polite" aria-atomic="true">
+          <h3>Saida</h3>
+
+          <div data-state="empty" class="state is-visible">
+            <p>Preencha os campos e clique em "Gerar prompt".</p>
+          </div>
+
+          <div data-state="loading" class="state">
+            <div class="skeleton"></div>
+            <div class="skeleton short"></div>
+            <p>Montando o prompt inicial...</p>
+          </div>
+
+          <div data-state="error" class="state">
+            <p class="error-text">Preencha objetivo e publico para continuar.</p>
+          </div>
+
+          <div data-state="success" class="state">
+            <p>Prompt gerado. Copie e ajuste no seu copiloto.</p>
+            <pre id="prompt-output"></pre>
+            <button id="copy-output" class="btn btn-ghost" type="button">Copiar prompt</button>
+          </div>
+        </aside>
+      </section>
+
+      <section id="contribuir" class="section callout">
+        <h2>Convite para novas features</h2>
+        <p>
+          Se quiser evoluir o MyMind, abra uma issue com proposta curta e, depois de alinhamento,
+          envie um PR pequeno. Priorizamos seguranca, qualidade de revisao e documentacao objetiva.
+        </p>
+        <a class="btn btn-primary" href="https://github.com/henriquescastilho/mymind/issues"
+          >Abrir issue no GitHub</a
+        >
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>MyMind - estrutura publica para projetos com privacidade por padrao.</p>
+    </footer>
+
+    <script src="assets/app.js"></script>
+  </body>
+</html>

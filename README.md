@@ -12,6 +12,7 @@ O projeto foi pensado para quem quer publicar materiais no GitHub com processo c
 
 ## O que existe hoje
 
+- `index.html`: home pública com método, gerador rápido de prompt e convite para contribuições
 - `MODELO_CORINGA_COPILOTOS.md`: prompt-base para saneamento de dados e organização antes de abrir o repositório
 - `KIT_PERGUNTAS_E_PROMPT.md`: kit anônimo de perguntas + prompt final para Codex ou Claude Code gerar a primeira versão
 
@@ -37,6 +38,12 @@ cat MODELO_CORINGA_COPILOTOS.md
 ```bash
 rg -n "@|cpf|telefone|tel|endere[çc]o|address|token|secret|senha|password|api[_-]?key|bearer|cookie" .
 ```
+
+5. Rodar a home pública localmente:
+```bash
+python3 -m http.server 8080
+```
+Depois, abra `http://localhost:8080`.
 
 ## Convite para novas features
 
