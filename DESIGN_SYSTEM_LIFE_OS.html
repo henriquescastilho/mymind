@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>DME Life OS Design System</title>
+  <style>
+    :root {
+      --bg: #080808;
+      --surface: #0f0f0f;
+      --card: #141414;
+      --border: #1e1e1e;
+      --border2: #2a2a2a;
+      --gold: #c8a84b;
+      --gold2: #e8c96a;
+      --gold-bg: rgba(200, 168, 75, 0.08);
+      --gold-border: rgba(200, 168, 75, 0.25);
+      --red: #e84040;
+      --red-bg: rgba(232, 64, 64, 0.08);
+      --green: #3ecf74;
+      --green-bg: rgba(62, 207, 116, 0.08);
+      --blue: #4a8fe8;
+      --blue-bg: rgba(74, 143, 232, 0.08);
+      --purple: #9b5de5;
+      --purple-bg: rgba(155, 93, 229, 0.08);
+      --orange: #e87a3e;
+      --orange-bg: rgba(232, 122, 62, 0.08);
+      --text: #d4d4d4;
+      --text2: #888888;
+      --text3: #555555;
+      --radius: 6px;
+      --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --font-display: "Bebas Neue", "Anton", "Impact", sans-serif;
+      --font-body: "DM Sans", "Segoe UI", Roboto, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.5;
+      padding-bottom: 48px;
+    }
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px 32px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(8, 8, 8, 0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 24px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand {
+      font-family: var(--font-display);
+      letter-spacing: 3px;
+      font-size: 22px;
+      color: var(--gold);
+    }
+
+    .topmeta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text3);
+      text-transform: uppercase;
+    }
+
+    .section {
+      margin-top: 24px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      letter-spacing: 2px;
+      font-size: 34px;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .section-sub {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--text3);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+
+    .grid-2,
+    .grid-3,
+    .grid-4 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .label::before {
+      content: "";
+      width: 2px;
+      height: 12px;
+      background: var(--gold);
+      border-radius: 1px;
+    }
+
+    .muted { color: var(--text2); }
+
+    .token {
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      padding: 10px;
+      background: var(--surface);
+    }
+
+    .swatch {
+      height: 46px;
+      border-radius: 4px;
+      border: 1px solid var(--border2);
+      margin-bottom: 8px;
+    }
+
+    .token-name {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .token-val {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text3);
+      word-break: break-all;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: var(--font-mono);
+      text-transform: uppercase;
+      letter-spacing: 1.6px;
+      font-size: 9px;
+      padding: 9px 14px;
+      transition: all 0.15s ease;
+    }
+
+    .btg {
+      background: var(--gold);
+      color: #080808;
+      font-weight: 700;
+    }
+
+    .btg:hover { background: var(--gold2); }
+
+    .bto {
+      background: transparent;
+      color: var(--text2);
+      border: 1px solid var(--border2);
+    }
+
+    .bto:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .btd {
+      background: transparent;
+      color: var(--red);
+      border: 1px solid rgba(232, 64, 64, 0.3);
+    }
+
+    .btd:hover { background: var(--red-bg); }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 2px;
+      border: 1px solid;
+      padding: 2px 7px;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .bg { color: var(--gold); border-color: var(--gold-border); background: var(--gold-bg); }
+    .bgr { color: var(--green); border-color: rgba(62, 207, 116, 0.3); background: var(--green-bg); }
+    .br { color: var(--red); border-color: rgba(232, 64, 64, 0.3); background: var(--red-bg); }
+    .bb { color: var(--blue); border-color: rgba(74, 143, 232, 0.3); background: var(--blue-bg); }
+    .bp { color: var(--purple); border-color: rgba(155, 93, 229, 0.3); background: var(--purple-bg); }
+
+    .alert {
+      padding: 10px 13px;
+      border-radius: 5px;
+      border-left: 2px solid;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+
+    .ag { background: var(--gold-bg); border-color: var(--gold); color: var(--gold); }
+    .ar { background: var(--red-bg); border-color: var(--red); color: var(--red); }
+    .ab { background: var(--blue-bg); border-color: var(--blue); color: var(--blue); }
+    .ap { background: var(--purple-bg); border-color: var(--purple); color: var(--purple); }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-bottom: 12px;
+    }
+
+    .tab {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: var(--text3);
+      text-transform: uppercase;
+      padding: 8px 10px;
+      border: 1px solid transparent;
+      border-bottom: 2px solid transparent;
+    }
+
+    .tab.on {
+      color: var(--gold);
+      border-bottom-color: var(--gold);
+    }
+
+    .field-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text2);
+      margin-bottom: 6px;
+      display: block;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border2);
+      border-radius: 4px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      padding: 8px 10px;
+      outline: none;
+    }
+
+    textarea {
+      font-family: var(--font-body);
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 0;
+    }
+
+    .row:last-child { border-bottom: none; }
+
+    .meter {
+      margin-top: 8px;
+    }
+
+    .meter-top {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 8px;
+      color: var(--text3);
+      margin-bottom: 5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .track {
+      height: 3px;
+      background: var(--border2);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      border-radius: 2px;
+      background: var(--gold);
+      animation: load 1s ease forwards;
+    }
+
+    .fill.blue { background: var(--blue); width: 64%; }
+    .fill.green { background: var(--green); width: 82%; }
+    .fill.gold { background: var(--gold); width: 71%; }
+
+    @keyframes load {
+      from { width: 0; }
+    }
+
+    .footnote {
+      margin-top: 10px;
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--text3);
+    }
+
+    @media (max-width: 900px) {
+      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 680px) {
+      .topbar { padding: 14px 16px; }
+      .page { padding: 0 16px 28px; }
+      .grid-2,
+      .grid-3,
+      .grid-4 { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">DME LIFE OS</div>
+    <div class="topmeta">Design system baseado no LIFE_OS_HENRIQUE.html</div>
+  </header>
+
+  <main class="page">
+    <section class="section">
+      <h1 class="section-title">Foundation</h1>
+      <p class="section-sub">Colors, type and spacing primitives</p>
+      <div class="grid-4">
+        <article class="token"><div class="swatch" style="background:#080808"></div><div class="token-name">--bg</div><div class="token-val">#080808</div></article>
+        <article class="token"><div class="swatch" style="background:#141414"></div><div class="token-name">--card</div><div class="token-val">#141414</div></article>
+        <article class="token"><div class="swatch" style="background:#c8a84b"></div><div class="token-name">--gold</div><div class="token-val">#c8a84b</div></article>
+        <article class="token"><div class="swatch" style="background:#e84040"></div><div class="token-name">--red</div><div class="token-val">#e84040</div></article>
+        <article class="token"><div class="swatch" style="background:#3ecf74"></div><div class="token-name">--green</div><div class="token-val">#3ecf74</div></article>
+        <article class="token"><div class="swatch" style="background:#4a8fe8"></div><div class="token-name">--blue</div><div class="token-val">#4a8fe8</div></article>
+        <article class="token"><div class="swatch" style="background:#9b5de5"></div><div class="token-name">--purple</div><div class="token-val">#9b5de5</div></article>
+        <article class="token"><div class="swatch" style="background:#e87a3e"></div><div class="token-name">--orange</div><div class="token-val">#e87a3e</div></article>
+      </div>
+      <div class="card" style="margin-top:12px">
+        <div class="label">Typography</div>
+        <div style="font-family:var(--font-display);font-size:44px;letter-spacing:2px">Bebas style headline</div>
+        <div style="font-family:var(--font-body);font-size:14px;margin-top:8px">Body copy for cards, blocks and narrative text.</div>
+        <div style="font-family:var(--font-mono);font-size:11px;margin-top:6px;color:var(--text2)">Mono labels, metadata and microcopy.</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Core Components</h2>
+      <p class="section-sub">Buttons, badges, alerts and tabs</p>
+      <div class="grid-2">
+        <article class="card">
+          <div class="label">Buttons</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <button class="btn btg">Primary</button>
+            <button class="btn bto">Secondary</button>
+            <button class="btn btd">Danger</button>
+          </div>
+        </article>
+        <article class="card">
+          <div class="label">Badges</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <span class="badge bg">gold</span>
+            <span class="badge bgr">success</span>
+            <span class="badge br">error</span>
+            <span class="badge bb">info</span>
+            <span class="badge bp">focus</span>
+          </div>
+        </article>
+      </div>
+
+      <div class="grid-2" style="margin-top:12px">
+        <article class="card">
+          <div class="label">Alerts</div>
+          <div class="alert ag">Nivel estrategico: alinhado ao plano semanal.</div>
+          <div class="alert ab">Atualizacao: bloco de foco iniciado.</div>
+          <div class="alert ap">Revisao: revisar conteudo em 24h.</div>
+          <div class="alert ar">Risco: atraso critico identificado.</div>
+        </article>
+        <article class="card">
+          <div class="label">Navigation</div>
+          <div class="tabs">
+            <span class="tab on">Check-in</span>
+            <span class="tab">Habits</span>
+            <span class="tab">Schedule</span>
+            <span class="tab">Projects</span>
+          </div>
+          <p class="muted">Tab ativa usa underline dourado e texto com alto contraste.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Data Components</h2>
+      <p class="section-sub">Forms, list rows and progress meters</p>
+      <div class="grid-2">
+        <article class="card">
+          <div class="label">Form Fields</div>
+          <label class="field-label" for="goal">Goal</label>
+          <input id="goal" type="text" placeholder="Ex: fechar modulo de pagamentos">
+          <div style="height:8px"></div>
+          <label class="field-label" for="prio">Priority</label>
+          <select id="prio">
+            <option>High</option>
+            <option>Medium</option>
+            <option>Low</option>
+          </select>
+          <div style="height:8px"></div>
+          <label class="field-label" for="notes">Notes</label>
+          <textarea id="notes" placeholder="Notas operacionais do dia"></textarea>
+        </article>
+
+        <article class="card">
+          <div class="label">Status Rows</div>
+          <div class="row"><span class="muted">Deep work</span><span class="badge bgr">done</span></div>
+          <div class="row"><span class="muted">Review queue</span><span class="badge bb">in progress</span></div>
+          <div class="row"><span class="muted">Backlog cleanup</span><span class="badge br">blocked</span></div>
+
+          <div class="label" style="margin-top:12px">Progress Meters</div>
+          <div class="meter">
+            <div class="meter-top"><span>Projects</span><span>71%</span></div>
+            <div class="track"><div class="fill gold"></div></div>
+          </div>
+          <div class="meter">
+            <div class="meter-top"><span>Training</span><span>64%</span></div>
+            <div class="track"><div class="fill blue"></div></div>
+          </div>
+          <div class="meter">
+            <div class="meter-top"><span>Habits</span><span>82%</span></div>
+            <div class="track"><div class="fill green"></div></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Layout Recipes</h2>
+      <p class="section-sub">Grid patterns used in the original layout</p>
+      <div class="grid-3">
+        <article class="card"><div class="label">Recipe 1</div><p class="muted">Dashboard KPIs / exam counters</p></article>
+        <article class="card"><div class="label">Recipe 2</div><p class="muted">Action list / checklist blocks</p></article>
+        <article class="card"><div class="label">Recipe 3</div><p class="muted">Plan cards by priority lanes</p></article>
+      </div>
+      <p class="footnote">Responsive: 4 cols -&gt; 2 cols under 900px -&gt; 1 col under 680px.</p>
+    </section>
+  </main>
+</body>
+</html>
