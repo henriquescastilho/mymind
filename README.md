@@ -1,8 +1,8 @@
 # MyMind
 
-MyMind e um repositório-base para organizar conhecimento e fluxos com IA sem expor dados pessoais.
+MyMind é um repositório-base para organizar conhecimento e fluxos com IA sem expor dados pessoais.
 
-Este projeto foi pensado para quem quer publicar materiais no GitHub com um processo claro de higienização, estrutura e colaboração.
+O projeto foi pensado para quem quer publicar materiais no GitHub com processo claro de higienização, estrutura e colaboração.
 
 ## Objetivo
 
@@ -13,7 +13,7 @@ Este projeto foi pensado para quem quer publicar materiais no GitHub com um proc
 ## O que existe hoje
 
 - `MODELO_CORINGA_COPILOTOS.md`: prompt-base para saneamento de dados e organização antes de abrir o repositório
-- `KIT_PERGUNTAS_E_PROMPT.md`: kit anonimo de perguntas + prompt final para Codex/Claude Code construir a primeira versao
+- `KIT_PERGUNTAS_E_PROMPT.md`: kit anônimo de perguntas + prompt final para Codex ou Claude Code gerar a primeira versão
 
 ## Como usar
 
@@ -28,14 +28,14 @@ cd mymind
 cat KIT_PERGUNTAS_E_PROMPT.md
 ```
 
-3. Abra e adapte o modelo:
+3. Cole o prompt final no Codex ou Claude Code com suas respostas:
 ```bash
 cat MODELO_CORINGA_COPILOTOS.md
 ```
 
-4. Execute a triagem local de riscos antes de qualquer publicação:
+4. Execute a triagem local antes de qualquer publicação:
 ```bash
-rg -n "@|cpf|telefone|tel|endereco|address|token|secret|senha|password|api[_-]?key|bearer|cookie" .
+rg -n "@|cpf|telefone|tel|endere[çc]o|address|token|secret|senha|password|api[_-]?key|bearer|cookie" .
 ```
 
 ## Convite para novas features
@@ -47,11 +47,12 @@ Contribuições são bem-vindas, especialmente para:
 - automações de validação local antes de `git push`
 - exemplos de estrutura pública sem dados sensíveis
 
-Se quiser propor algo:
+Para contribuir:
 
-1. Abra uma issue com problema, contexto e proposta objetiva.
-2. Se houver alinhamento, abra um PR pequeno e fácil de revisar.
-3. Evite incluir qualquer dado pessoal real nos exemplos.
+1. Abra uma issue com contexto, problema e proposta objetiva.
+2. Alinhe o escopo antes de implementar.
+3. Envie PR pequeno, direto e fácil de revisar.
+4. Não inclua dados pessoais reais em exemplos, commits ou histórico.
 
 ## Padrão de contribuição
 
@@ -69,4 +70,4 @@ Se quiser propor algo:
 
 ## Segurança
 
-Se identificar qualquer informação sensível no histórico, trate antes de continuar. Em casos necessários, reescreva o histórico com ferramentas adequadas e valide com backup.
+Se identificar informação sensível no histórico, trate antes de continuar. Quando necessário, reescreva histórico com ferramenta adequada e validação com backup.
