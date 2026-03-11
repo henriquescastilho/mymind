@@ -16,18 +16,18 @@ function showState(nextState) {
 
 function buildPrompt({ objetivo, publico, arquivos }) {
   return [
-    "Voce vai me ajudar a construir a versao inicial de um projeto publico sem dados pessoais.",
+    "Você vai me ajudar a construir a versão inicial de um projeto público sem dados pessoais.",
     "",
     "Contexto base:",
     `- Objetivo: ${objetivo}`,
-    `- Publico: ${publico}`,
+    `- Público: ${publico}`,
     `- Arquivos iniciais esperados: ${arquivos.join(", ") || "README.md"}`,
     "",
     "Regras:",
-    "- Nao incluir dados pessoais reais.",
-    "- Usar placeholders para qualquer dado identificavel.",
-    "- Entregar mudancas pequenas e revisaveis.",
-    "- Incluir convite para contribuicoes e novas features no README.",
+    "- Não incluir dados pessoais reais.",
+    "- Usar placeholders para qualquer dado identificável.",
+    "- Entregar mudanças pequenas e revisáveis.",
+    "- Incluir convite para contribuições e novas features no README.",
     "",
     "Entregue no final:",
     "1) O que mudou",
@@ -70,7 +70,7 @@ copyButton.addEventListener("click", async () => {
     await navigator.clipboard.writeText(text);
     copyButton.textContent = "Prompt copiado";
   } catch {
-    copyButton.textContent = "Nao foi possivel copiar";
+    copyButton.textContent = "Não foi possível copiar";
   }
 
   window.setTimeout(() => {
